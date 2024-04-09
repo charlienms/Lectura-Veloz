@@ -1,0 +1,54 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#output {
+    font-size: 24px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#btnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#btnPlay, #btnPause {
+    font-size: 0;
+    padding: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+#btnPlay img, #btnPause img {
+    width: 24px; /* Ajusta el ancho según tus preferencias */
+    height: 24px; /* Ajusta la altura según tus preferencias */
+}
+
+.center-container {
+    display: inline-block;
+}
+
+.center-container span {
+    color: red;
+}
+
+#speedSlider {
+    width: 200px;
+}

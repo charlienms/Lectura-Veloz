@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impresión de Palabras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="output"></div>
+    <div>
+        <input type="range" id="speedSlider" min="200" max="1000" value="500" step="100">
+        <label for="speedSlider">PPM: <span id="speedValue">200</span></label>
+    </div>
+    <div class="button-container">
+        <div id="btnContainer">
+            <button id="btnPlay">
+                <img src="play.png" alt="Play Icon">
+            </button>
+            <button id="btnPause">
+                <img src="pausa.png" alt="Pause Icon">
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
