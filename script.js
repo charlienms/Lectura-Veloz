@@ -1,100 +1,105 @@
-const palabras = [
-    "Había", "una", "vez", "en", "el", "lejano", "reino", "de", "Encantoville,", "un", "pueblo", "encantador",
-    "donde", "la", "magia", "fluía", "como", "el", "aire", "que", "respiraban", "sus", "habitantes.", "En", "este",
-    "mágico", "rincón", "del", "mundo", "vivía", "una", "niña", "llamada", "Isabella,", "cuya", "curiosidad", "era",
-    "tan", "grande", "como", "la", "inmensidad", "del", "cielo", "nocturno.", "Un", "día,", "mientras", "paseaba",
-    "por", "las", "pintorescas", "calles", "de", "Encantoville,", "Isabella", "sintió", "la", "llamada", "de",
-    "la", "aventura.", "Decidió", "explorar", "el", "bosque", "mágico", "que", "se", "erguía", "majestuosamente",
-    "cerca", "de", "su", "acogedora", "casa.", "Caminó", "entre", "árboles", "altos", "que", "parecían", "tocar",
-    "el", "cielo", "y", "flores", "brillantes", "que", "iluminaban", "el", "camino", "con", "colores", "deslumbrantes.",
-    "El", "bosque", "resonaba", "con", "susurros", "mágicos", "y", "el", "murmullo", "del", "arroyo", "que", "corría",
-    "junto", "a", "ella.", "De", "repente,", "entre", "las", "sombras", "del", "bosque,", "Isabella", "se", "encontró",
-    "con", "una", "criatura", "mágica", "que", "brillaba", "con", "una", "luz", "resplandeciente.", "La", "criatura",
-    "se", "le", "acercó", "y", "le", "preguntó:", "'Hola,", "¿dónde", "estás?", "¿Quieres", "acompañarme", "en", "una",
-    "aventura?'", "Isabella", "sonrió", "con", "emoción", "y", "respondió:", "'¡Claro!", "Vamos", "juntos.'",
-    "Emocionada", "por", "la", "perspectiva", "de", "una", "nueva", "aventura,", "Isabella", "y", "la", "criatura",
-    "mágica", "se", "adentraron", "en", "el", "bosque.", "A", "cada", "paso,", "descubrían", "maravillas", "ocultas",
-    "y", "se", "encontraban", "con", "seres", "mágicos", "que", "saludaban", "a", "Isabella", "con", "cánticos", "melódicos.",
-    "El", "bosque", "se", "volvía", "más", "denso", "y", "misterioso,", "y", "la", "luz", "del", "sol", "se", "filtraba",
-    "entre", "las", "hojas", "creando", "un", "tapiz", "de", "luces", "y", "sombras.", "Isabella", "se", "maravillaba",
-    "con", "cada", "rincón", "del", "bosque", "y", "se", "preguntaba", "qué", "otras", "aventuras", "le", "depararía",
-    "este", "mágico", "lugar."
-];
+let text = `La luna es un satélite natural de la Tierra. Es el objeto más brillante en el cielo después del Sol, aunque su superficie es oscura. La luna brilla porque refleja la luz del Sol. La Luna no tiene luz propia, solo refleja la luz del Sol. La Luna gira alrededor de la Tierra. Tarda 27,3 días en completar una órbita alrededor de la Tierra. Este tiempo se llama mes lunar. La Luna gira sobre su eje a la misma velocidad que gira alrededor de la Tierra, por eso siempre vemos la misma cara de la Luna.
+La Luna es el único cuerpo celeste al que el ser humano ha llegado en persona. La primera misión tripulada que llegó a la Luna fue la misión Apolo 11 en 1969. Neil Armstrong fue el primer ser humano en caminar sobre la superficie lunar. La tripulación de la Apolo 11 estaba compuesta por tres astronautas: Neil Armstrong, Edwin "Buzz" Aldrin y Michael Collins. Armstrong y Aldrin caminaron sobre la Luna, mientras que Collins permaneció en la órbita lunar.
+La superficie de la Luna es muy irregular. Está cubierta de cráteres de impacto y montañas. También hay mares lunares, que en realidad son planicies basálticas. La Luna no tiene atmósfera, por lo tanto, no hay viento ni lluvia en la Luna. Las temperaturas en la Luna son extremas. Durante el día, la temperatura puede llegar hasta 127 °C. Durante la noche, puede bajar hasta -173 °C.
+La Luna afecta las mareas en la Tierra. Las mareas son movimientos periódicos del nivel del mar que se producen como resultado de la atracción gravitatoria de la Luna y el Sol sobre la Tierra. Las mareas altas y bajas se suceden aproximadamente cada 12 horas y 25 minutos. Estos movimientos afectan a los océanos y a las costas.`;
 
-let indice = 0;
-let intervalo;
-let velocidad = 200;
-let pausado = false;
+// Convertimos el texto en un array de palabras
+let words = text.split(/\s+/);
 
-function imprimirPalabra() {
-    if (pausado) {
-        return;
-    }
+let index = 0;
+let wpm = 200;
+let interval;
 
-    const palabra = palabras[indice];
-    const longitud = palabra.length;
-    const mitad = Math.floor(longitud / 2);
+function updateWord() {
+    let word = words[index];
+    let midIndex = 0;
+    document.getElementById('wordDisplay').innerHTML = "<span class='left-word'>" + word.substring(0, midIndex) + "</span>" + 
+        "<span class='highlight-letter'>" + word[midIndex] + "</span>" + 
+        word.substring(midIndex + 1);
 
-    const palabraFormateada =
-        '<div class="center-container">' +
-        palabra.substring(0, mitad) +
-        '<span>' +
-        palabra.charAt(mitad) +
-        '</span>' +
-        palabra.substring(mitad + 1) +
-        '</div>';
-
-    document.getElementById('output').innerHTML = palabraFormateada;
-    indice++;
-
-    if (indice >= palabras.length) {
-        clearInterval(intervalo);
-    }
+    updateTeleprompter();
 }
 
-function pausarImpresion() {
-    pausado = true;
-    document.getElementById('btnPauseImg').src = 'play_pausa.png';
-    document.getElementById('btnPause').setAttribute('onclick', 'reanudarImpresion()');
-    actualizarVelocidad(); // Agrega esta línea para actualizar la velocidad al pausar
+function updateTeleprompter() {
+    let textDisplay = document.getElementById('textDisplay');
+    let highlightedText = words.map((w, i) => {
+        if (i === index) {
+            return `<span class='highlight-word'>${w}</span>`;
+        } else {
+            return w;
+        }
+    }).join(' ');
+    textDisplay.innerHTML = highlightedText;
 }
 
-function reanudarImpresion() {
-    pausado = false;
-    document.getElementById('btnPauseImg').src = 'pausa.png';
-    document.getElementById('btnPause').setAttribute('onclick', 'pausarImpresion()');
-    actualizarVelocidad(); // Agrega esta línea para actualizar la velocidad al reanudar
-}
-
-function actualizarVelocidad() {
-    velocidad = 60000 / document.getElementById('speedSlider').value;
-    document.getElementById('speedValue').innerText = document.getElementById('speedSlider').value;
-    if (!pausado && intervalo) {
-        clearInterval(intervalo);
-        intervalo = setInterval(imprimirPalabra, velocidad);
-    }
-}
-
-function iniciarImpresion() {
-    if (intervalo) {
-        clearInterval(intervalo);
-    }
-    indice = 0;
-    pausado = false;
-    document.getElementById('speedSlider').value = 500; // Establecer el valor predeterminado del slider
-    actualizarVelocidad();
-    intervalo = setInterval(imprimirPalabra, velocidad);
-}
-
-
-
-document.getElementById('btnPause').addEventListener('click', function () {
-    if (pausado) {
-        reanudarImpresion();
+function togglePlayPause() {
+    let button = document.getElementById('playPauseIcon');
+    if (interval) {
+        clearInterval(interval);
+        interval = null;
+        button.classList.remove('fa-pause');
+        button.classList.add('fa-play');
     } else {
-        pausarImpresion();
+        interval = setInterval(() => {
+            if (index < words.length - 1) {
+                index++;
+                updateWord();
+            } else {
+                clearInterval(interval);
+                interval = null;
+            }
+        }, 60000 / wpm);
+        button.classList.remove('fa-play');
+        button.classList.add('fa-pause');
     }
-});
+}
 
-document.getElementById('speedSlider').addEventListener('input', actualizarVelocidad);
-document.getElementById('btnPlay').addEventListener('click', iniciarImpresion);
+function pause() {
+    clearInterval(interval);
+    interval = null;
+    document.getElementById('playPauseIcon').classList.remove('fa-pause');
+    document.getElementById('playPauseIcon').classList.add('fa-play');
+}
+
+function play() {
+    if (!interval) {
+        interval = setInterval(() => {
+            if (index < words.length - 1) {
+                index++;
+                updateWord();
+            } else {
+                clearInterval(interval);
+                interval = null;
+            }
+        }, 60000 / wpm);
+        document.getElementById('playPauseIcon').classList.remove('fa-play');
+        document.getElementById('playPauseIcon').classList.add('fa-pause');
+    }
+}
+
+function changeSpeed() {
+    let newWpm = parseInt(document.getElementById('wpmInput').value);
+    wpm = Math.max(10, newWpm);
+    if (interval) {
+        clearInterval(interval);
+        interval = setInterval(() => {
+            if (index < words.length - 1) {
+                index++;
+                updateWord();
+            } else {
+                clearInterval(interval);
+                interval = null;
+            }
+        }, 60000 / wpm);
+    }
+}
+
+function moveWords(direction) {
+    let numWords = parseInt(document.getElementById('wordsInput').value) * direction;
+    pause();
+    index = Math.max(0, Math.min(words.length - 1, index + numWords));
+    updateWord();
+}
+
+updateWord();
+updateTeleprompter();
