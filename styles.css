@@ -1,54 +1,105 @@
 body {
-    background-color: #ffffff;
-    font-family: 'Times New Roman', serif;
-    text-align: center;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
     height: 100vh;
+    background-color: #f0f0f0;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-#output {
-    font-size: 24px;
-    position: relative;
-    margin-bottom: 20px;
+.container {
+    position: absolute;
+    top: 40%;
+    right: 58%;
 }
 
-.button-container {
+.word-display {
+    font-size: 5rem;
+    position: absolute; /* To center highlight-letter inside it */
+}
+
+.controls {
     position: absolute;
     top: 10px;
-    left: 10px;
-}
-
-#btnContainer {
+    right: 10px;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
-#btnPlay, #btnPause {
-    font-size: 0;
-    padding: 10px;
-    cursor: pointer;
-    background: none;
+.controls-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.input-group input {
+    width: 70px;
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 5px;
     border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
 }
 
-#btnPlay img, #btnPause img {
-    width: 24px; /* Ajusta el ancho según tus preferencias */
-    height: 24px; /* Ajusta la altura según tus preferencias */
+.input-group button {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.center-container {
-    display: inline-block;
+#playPauseButton {
+    width: 100%;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  #f0f0f0;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
-.center-container span {
+#playPauseButton i {
+    font-size: 20px;
+}
+
+#playPauseButton:hover {
+    background-color: #e2e2e2;
+}
+
+.input-group button:hover {
+    background-color: #e2e2e2;
+}
+
+.telepronter {
+    position: absolute;
+    top: 5%;
+    left: 2.5%;
+    width: 13%;
+    padding: 0.5%;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); /* Sombra sutil */
+    font-size: 60%; /* Tamaño del texto */
+}
+
+.highlight-word {
+    background-color: yellow;
+}
+
+.highlight-letter {
     color: red;
 }
 
-#speedSlider {
-    width: 200px;
-}
